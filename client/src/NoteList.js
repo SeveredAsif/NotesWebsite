@@ -59,6 +59,7 @@ const NotesList = () => {
         ))}
       </ul>
       <div>
+        <form>
         <input
           type="text"
           value={newNote}
@@ -67,6 +68,7 @@ const NotesList = () => {
         <button className="add-note-btn" onClick={handleAddNote}>
           Add Note
         </button>
+        </form>
       </div>
     </div>
   );

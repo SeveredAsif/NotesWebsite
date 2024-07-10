@@ -50,6 +50,46 @@ app.post("/notes", (req, res) => {
   });
 });
 
+// Delete a note
+app.delete("/notes/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = "DELETE FROM notes WHERE id = ?";
+  db.run(sql, id, function (err) {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: {
+        id: id,
+      },
+    });
+  });
+});
+
+// Update a note
+app.put("/notes/:id", (req, res) => {
+  const { id } = req.params;
+  const { note } = req.body;
+  const sql = "UPDATE notes SET note = ? WHERE id = ?";
+  const params = [note, id];
+  db.run(sql, params, function (err) {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.json({
+      message: "success",
+      data: {
+        id: id,
+        note: note,
+      },
+    });
+  });
+});
+
+
 // Start the Express server
 app.listen(port, () => {
   console.log(`Server running on port ${port}!`);
