@@ -1,10 +1,13 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
-const port = 3000;
+const port = 4000;
 
 // Middleware to parse JSON
 app.use(express.json());
+app.use(cors()); // Enable CORS
 
 // Connect to the SQLite database
 const db = new sqlite3.Database("./notes.db", (err) => {
@@ -49,5 +52,5 @@ app.post("/notes", (req, res) => {
 
 // Start the Express server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}!`);
 });
